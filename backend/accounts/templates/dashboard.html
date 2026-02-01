@@ -212,10 +212,14 @@
         </div>
 
         <div class="content">
+
+            <!-- WEEKLY -->
+            <h2>Last 7 Days</h2>
+
             <div class="stats-grid">
 
                 <div class="stat-card">
-                    <h3>Last 7 Days</h3>
+                    <h3>Total Spent</h3>
                     <p>৳ {{ weekly_total }}</p>
                 </div>
 
@@ -232,7 +236,7 @@
 
             </div>
 
-            <h3>Daily Breakdown (Last 7 Days)</h3>
+            <h3>Daily Breakdown</h3>
 
             <ul>
             {% for d in daily %}
@@ -240,13 +244,41 @@
             {% endfor %}
             </ul>
 
+            <hr>
 
-            <div class="welcome-section">
-                <div class="icon">🎉</div>
-                <h2>You're all set!</h2>
-                <p>Your dashboard is ready. This is where you'll find all your important information and updates.</p>
+            <!-- MONTHLY -->
+            <h2>This Month</h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <h3>Monthly Total</h3>
+                    <p>৳ {{ monthly_total }}</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Biggest Category</h3>
+                    <p>
+                    {% if biggest_category %}
+                        {{ biggest_category.category }} — ৳ {{ biggest_category.total }}
+                    {% else %}
+                        No data
+                    {% endif %}
+                    </p>
+                </div>
+
             </div>
+
+            <h3>Category Breakdown</h3>
+
+            <ul>
+            {% for c in categories %}
+                <li>{{ c.category }} : ৳ {{ c.total }}</li>
+            {% endfor %}
+            </ul>
+
         </div>
     </div>
 </body>
+
 </html>
