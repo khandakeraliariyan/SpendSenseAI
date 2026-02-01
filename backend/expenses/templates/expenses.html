@@ -92,7 +92,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 2fr 1fr 1.5fr;
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -101,7 +101,18 @@
             position: relative;
         }
 
-        .form-group input {
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 15px 20px;
             border: 2px solid #e0e0e0;
@@ -111,7 +122,8 @@
             background: #f8f9fa;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
             background: white;
@@ -119,6 +131,19 @@
         }
 
         .form-group input::placeholder {
+            color: #999;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            color: #333;
+        }
+
+        .form-group select option {
+            padding: 10px;
+        }
+
+        .form-group select option:first-child {
             color: #999;
         }
 
@@ -166,17 +191,18 @@
         }
 
         .expense-item {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-left: 5px solid #667eea;
+            padding: 25px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             transition: all 0.3s ease;
             animation: slideIn 0.3s ease-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         @keyframes slideIn {
@@ -191,8 +217,9 @@
         }
 
         .expense-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            border-left-width: 7px;
         }
 
         .expense-info {
@@ -200,64 +227,117 @@
         }
 
         .expense-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
         }
 
         .expense-details {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .expense-amount {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: #667eea;
+            padding: 6px 14px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
         }
 
         .expense-category {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #e9ecef;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
             border-radius: 20px;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            font-size: 14px;
+            color: #555;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
+        }
+
+        .expense-category:before {
+            content: "📂";
+            margin-right: 6px;
+            font-size: 14px;
+        }
+
+        .expense-actions {
+            display: flex;
+            gap: 10px;
         }
 
         .delete-btn {
-            padding: 10px 20px;
-            background: #dc3545;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
             white-space: nowrap;
+            box-shadow: 0 3px 12px rgba(220, 53, 69, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .delete-btn:hover {
-            background: #c82333;
+            background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
             transform: scale(1.05);
+            box-shadow: 0 5px 16px rgba(220, 53, 69, 0.4);
         }
 
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: #999;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            border: 2px dashed #dee2e6;
         }
 
         .empty-state-icon {
-            font-size: 60px;
-            margin-bottom: 15px;
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.7;
         }
 
         .empty-state p {
+            font-size: 18px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .total-expenses {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-expenses-label {
             font-size: 16px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .total-expenses-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
         }
 
         @media (max-width: 768px) {
@@ -283,14 +363,25 @@
             .expense-item {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 20px;
             }
 
             .expense-details {
                 width: 100%;
             }
 
+            .expense-actions {
+                width: 100%;
+            }
+
             .delete-btn {
                 width: 100%;
+                justify-content: center;
+            }
+
+            .total-expenses {
+                flex-direction: column;
+                gap: 10px;
                 text-align: center;
             }
         }
@@ -309,43 +400,52 @@
                 {% csrf_token %}
                 <div class="form-grid">
                     <div class="form-group">
-                        <input name="title" placeholder="Title" required>
+                        <label>Expense Title</label>
+                        <input name="title" placeholder="e.g., Grocery Shopping" required>
                     </div>
                     <div class="form-group">
-                        <input name="amount" type="number" step="0.01" placeholder="Amount" required>
+                        <label>Amount (৳)</label>
+                        <input name="amount" type="number" step="0.01" placeholder="0.00" required>
                     </div>
                     <div class="form-group">
+                        <label>Category</label>
                         <select name="category" required>
-                            <option value="">Select Category</option>
-                            <option value="Food">Food</option>
-                            <option value="Transport">Transport</option>
-                            <option value="Shopping">Shopping</option>
-                            <option value="Bills">Bills</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Health">Health</option>
-                            <option value="Education">Education</option>
-                            <option value="Other">Other</option>
+                            <option value="">Choose...</option>
+                            <option value="Food">🍔 Food</option>
+                            <option value="Transport">🚗 Transport</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Bills">📄 Bills</option>
+                            <option value="Entertainment">🎮 Entertainment</option>
+                            <option value="Health">⚕️ Health</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Other">📌 Other</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="add-btn">Add Expense</button>
+                <button type="submit" class="add-btn">💾 Add Expense</button>
             </form>
         </div>
 
         <div class="expenses-list-card">
             <h3>📋 Expense List</h3>
             {% if expenses %}
+                <div class="total-expenses">
+                    <span class="total-expenses-label">Total Expenses</span>
+                    <span class="total-expenses-amount">৳ {{ expenses|length }}</span>
+                </div>
                 <ul class="expenses-list">
                     {% for e in expenses %}
                     <li class="expense-item">
                         <div class="expense-info">
                             <div class="expense-title">{{ e.title }}</div>
                             <div class="expense-details">
-                                <span class="expense-amount">${{ e.amount }}</span>
+                                <span class="expense-amount">৳ {{ e.amount }}</span>
                                 <span class="expense-category">{{ e.category }}</span>
                             </div>
                         </div>
-                        <a href="/expenses/delete/{{ e.id }}/" class="delete-btn">🗑️ Delete</a>
+                        <div class="expense-actions">
+                            <a href="/expenses/delete/{{ e.id }}/" class="delete-btn">🗑️ Delete</a>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
