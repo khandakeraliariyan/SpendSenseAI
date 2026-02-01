@@ -30,6 +30,10 @@ def dashboard_view(request):
 
     biggest_day = daily.order_by("-total").first()
 
+    # -------- PREDICTION --------
+    daily_avg = weekly_total / 7
+    predicted_month = round(daily_avg * 30, 2)
+
     # -------- MONTHLY --------
 
     monthly_expenses = Expense.objects.filter(
@@ -53,6 +57,8 @@ def dashboard_view(request):
         "weekly_total": round(weekly_total, 2),
         "daily": daily,
         "biggest_day": biggest_day,
+
+        "predicted_month": predicted_month,
 
         "monthly_total": round(monthly_total, 2),
         "categories": categories,
