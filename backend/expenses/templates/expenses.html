@@ -1,0 +1,22 @@
+<h2>Your Expenses</h2>
+
+<form method="post">
+{% csrf_token %}
+<input name="title" placeholder="Title" required>
+<input name="amount" type="number" step="0.01" placeholder="Amount" required>
+<input name="category" placeholder="Category" required>
+<button>Add</button>
+</form>
+
+<hr>
+
+<ul>
+{% for e in expenses %}
+<li>
+{{ e.title }} - {{ e.amount }} - {{ e.category }}
+<a href="/expenses/delete/{{ e.id }}/">Delete</a>
+</li>
+{% endfor %}
+</ul>
+
+<a href="/dashboard/">Back</a>
