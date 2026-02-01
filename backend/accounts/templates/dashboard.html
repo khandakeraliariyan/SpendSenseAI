@@ -214,16 +214,18 @@
         <div class="content">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Account Status</h3>
-                    <p>✓ Active</p>
+                    <h3>Total Spent</h3>
+                    <p>৳ {{ total_spent }}</p>
                 </div>
+
                 <div class="stat-card">
-                    <h3>Member Since</h3>
-                    <p>{{ request.user.date_joined|date:"M Y" }}</p>
+                    <h3>Total Expenses</h3>
+                    <p>{{ count }}</p>
                 </div>
+
                 <div class="stat-card">
-                    <h3>Last Login</h3>
-                    <p>{{ request.user.last_login|date:"M d, Y" }}</p>
+                    <h3>Average / Day</h3>
+                    <p>৳ {{ avg_per_day }}</p>
                 </div>
             </div>
 
