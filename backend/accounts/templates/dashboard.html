@@ -283,7 +283,32 @@
             {% endfor %}
             </ul>
 
+            <hr>
+
+            <h2>Smart Insights</h2>
+
+            <p>
+            <strong>Biggest Money Leak:</strong>
+            {{ waste_category }} — ৳ {{ waste_amount }}
+            </p>
+
+            <p>
+            <strong>Estimated Monthly Saving:</strong>
+            ৳ {{ estimated_saving }}
+            </p>
+
+            <h3>Personalized Tips</h3>
+
+            <ul>
+            {% for t in tips %}
+                <li>{{ t }}</li>
+            {% endfor %}
+            </ul>
+
+
         </div>
+
+        
     </div>
 </body>
 
