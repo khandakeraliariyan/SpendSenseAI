@@ -213,21 +213,33 @@
 
         <div class="content">
             <div class="stats-grid">
+
                 <div class="stat-card">
-                    <h3>Total Spent</h3>
-                    <p>৳ {{ total_spent }}</p>
+                    <h3>Last 7 Days</h3>
+                    <p>৳ {{ weekly_total }}</p>
                 </div>
 
                 <div class="stat-card">
-                    <h3>Total Expenses</h3>
-                    <p>{{ count }}</p>
+                    <h3>Biggest Day</h3>
+                    <p>
+                    {% if biggest_day %}
+                        {{ biggest_day.day }} — ৳ {{ biggest_day.total }}
+                    {% else %}
+                        No data
+                    {% endif %}
+                    </p>
                 </div>
 
-                <div class="stat-card">
-                    <h3>Average / Day</h3>
-                    <p>৳ {{ avg_per_day }}</p>
-                </div>
             </div>
+
+            <h3>Daily Breakdown (Last 7 Days)</h3>
+
+            <ul>
+            {% for d in daily %}
+                <li>{{ d.day }} : ৳ {{ d.total }}</li>
+            {% endfor %}
+            </ul>
+
 
             <div class="welcome-section">
                 <div class="icon">🎉</div>

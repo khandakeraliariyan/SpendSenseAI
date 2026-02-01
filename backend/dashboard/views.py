@@ -2,29 +2,36 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from expenses.models import Expense
 from django.db.models import Sum
-from datetime import date
+from datetime import timedelta
+from django.utils import timezone
 
 @login_required
 def dashboard_view(request):
-    expenses = Expense.objects.filter(user=request.user)
 
-    total_spent = expenses.aggregate(Sum("amount"))["amount__sum"] or 0
-    count = expenses.count()
+    today = timezone.now().date()
+    week_ago = today - timedelta(days=6)
 
-    today = date.today()
-    first_expense = expenses.order_by("created_at").first()
+    weekly_expenses = Expense.objects.filter(
+        user=request.user,
+        created_at__date__gte=week_ago
+    )
 
-    if first_expense:
-        days = (today - first_expense.created_at.date()).days + 1
-    else:
-        days = 1
+    weekly_total = weekly_expenses.aggregate(Sum("amount"))["amount__sum"] or 0
 
-    avg_per_day = round(total_spent / days, 2)
+    daily = (
+        weekly_expenses
+        .extra({'day': "date(created_at)"})
+        .values('day')
+        .annotate(total=Sum('amount'))
+        .order_by('day')
+    )
+
+    biggest_day = daily.order_by("-total").first()
 
     context = {
-        "total_spent": round(total_spent, 2),
-        "count": count,
-        "avg_per_day": avg_per_day,
+        "weekly_total": round(weekly_total, 2),
+        "daily": daily,
+        "biggest_day": biggest_day,
     }
 
     return render(request, "dashboard.html", context)
